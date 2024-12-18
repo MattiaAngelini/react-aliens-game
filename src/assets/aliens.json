@@ -1,0 +1,51 @@
+[
+    {
+      "id": 1,
+      "nome": "Flareon",
+      "tipo": "Fuoco",
+      "hp": 100,
+      "attacchi": [
+        { "nome": "Lanciafiamme", "danno": 20 },
+        { "nome": "Esplosione Solare", "danno": 30 },
+        { "nome": "Braciere", "danno": 15 },
+        { "nome": "Fiammata", "danno": 25 }
+      ]
+    },
+    {
+      "id": 2,
+      "nome": "Glaciora",
+      "tipo": "Ghiaccio",
+      "hp": 100,
+      "attacchi": [
+        { "nome": "Raffica Gelida", "danno": 18 },
+        { "nome": "Lancia di Ghiaccio", "danno": 25 },
+        { "nome": "Tempesta di Neve", "danno": 22 },
+        { "nome": "Pugnalata Artica", "danno": 28 }
+      ]
+    },
+    {
+      "id": 3,
+      "nome": "Meteorax",
+      "tipo": "Meteora",
+      "hp": 120,
+      "attacchi": [
+        { "nome": "Impulso Roccioso", "danno": 20 },
+        { "nome": "Impatto Meteoritico", "danno": 35 },
+        { "nome": "Frantumazione", "danno": 25 },
+        { "nome": "Caduta Asteroide", "danno": 30 }
+      ]
+    },
+    {
+      "id": 4,
+      "nome": "Voidon",
+      "tipo": "Vuoto Cosmico",
+      "hp": 100,
+      "attacchi": [
+        { "nome": "Risucchio del Vuoto", "danno": 22 },
+        { "nome": "Oscurità Assoluta", "danno": 30 },
+        { "nome": "Esplosione Gravitazionale", "danno": 28 },
+        { "nome": "Colpo del Nulla", "danno": 24 }
+      ]
+    }
+  ]
+  
