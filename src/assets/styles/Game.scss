@@ -16,4 +16,34 @@ section{
         left: 50%;
         transform: translate(-50%,0);   
     }
+
+    .front, .back{
+        width: 200px;
+        height: 200px;
+        border-radius: 30px; 
+    }
+
+    .alienBack{
+        position: absolute;
+        bottom: 15%;
+        left: 15%;
+    }
+
+    .alienFront{
+        position: absolute;
+        top: 15%;
+        right: 15%;
+    }
+
+    .base {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 400px;           
+        height: 40px;          
+        background-color: gray;  
+        border-radius: 50%;   
+        font-weight: 800;   
+      }
+
 }
