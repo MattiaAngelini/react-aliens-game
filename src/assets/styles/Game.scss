@@ -1,7 +1,19 @@
-.hero{
+section{
     height: 100vh;
-        img{
-            height: 100%;
-            width: 100%;
-        }
+    position: relative;
+
+    .hero{
+        height: 100%;         
+            img{
+                height: 100%;
+                width: 100%;              
+            } 
+    }
+    .ms-title{
+        position: absolute;
+        color: white;
+        top: 10px;
+        left: 50%;
+        transform: translate(-50%,0);   
+    }
 }
