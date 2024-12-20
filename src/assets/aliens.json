@@ -28,7 +28,7 @@
       "id": 3,
       "nome": "Meteorax",
       "tipo": "Meteora",
-      "hp": 520,
+      "hp": 500,
       "attacchi": [
         { "nome": "Impulso Roccioso", "danno": 20 },
         { "nome": "Impatto Meteoritico", "danno": 35 },
