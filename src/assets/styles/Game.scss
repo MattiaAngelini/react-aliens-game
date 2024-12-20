@@ -1,3 +1,4 @@
+
 .game{
     height: 100vh;
     position: relative;
@@ -12,6 +13,11 @@
         top: 10px;
         left: 50%;
         transform: translate(-50%,0);   
+    }
+
+    .attackTurn {
+        color: white;
+        font-weight: 700;
     }
     //******** aliens ***********
     .front, .back{
@@ -60,12 +66,14 @@
             color: white;
             font-weight: 600;
         }
+
         .bar{
             height: 30px;
-            width: 500px; //hp
             border-radius: 10px;
             background-color: green;
-        }     
+        
+        }
+            
       }
 
       .menu{
@@ -76,5 +84,10 @@
         display: grid;
         grid-template-columns: repeat(2,1fr);
         grid-template-rows: repeat(2,1fr);
+      }
+
+      .attack:hover{
+        cursor: pointer;
+        background-color: lightblue;
       }
 }

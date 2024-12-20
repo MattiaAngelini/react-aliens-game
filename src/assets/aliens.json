@@ -4,7 +4,7 @@
       "id": 1,
       "nome": "Flareon",
       "tipo": "Fuoco",
-      "hp": 100,
+      "hp": 500,
       "attacchi": [
         { "nome": "Lanciafiamme", "danno": 20 },
         { "nome": "Esplosione Solare", "danno": 30 },
@@ -16,7 +16,7 @@
       "id": 2,
       "nome": "Glaciora",
       "tipo": "Ghiaccio",
-      "hp": 100,
+      "hp": 500,
       "attacchi": [
         { "nome": "Raffica Gelida", "danno": 18 },
         { "nome": "Lancia di Ghiaccio", "danno": 25 },
@@ -28,7 +28,7 @@
       "id": 3,
       "nome": "Meteorax",
       "tipo": "Meteora",
-      "hp": 120,
+      "hp": 520,
       "attacchi": [
         { "nome": "Impulso Roccioso", "danno": 20 },
         { "nome": "Impatto Meteoritico", "danno": 35 },
@@ -40,7 +40,7 @@
       "id": 4,
       "nome": "Voidon",
       "tipo": "Vuoto Cosmico",
-      "hp": 100,
+      "hp": 500,
       "attacchi": [
         { "nome": "Risucchio del Vuoto", "danno": 22 },
         { "nome": "Oscurità Assoluta", "danno": 30 },

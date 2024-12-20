@@ -10,13 +10,21 @@ import aliensJson from './assets/aliens.json';
 
 import './assets/styles/Game.scss'
 import { useSelector } from 'react-redux';
+import  { useState } from 'react';
 
 function Game() {
   const player1Choice = useSelector((state) => state.players.player1)
   const player2Choice = useSelector((state) => state.players.player2)
   const aliens = aliensJson;
-  console.log(aliens)
- 
+  const hpPlayer1 = hpBar1()
+  const hpPlayer2 = hpBar2()
+  const [widthBar1, setWidth1] = useState(500); 
+  const [widthBar2, setWidth2] = useState(500); 
+
+  let [attackTurn,setAttack] = useState(player1Choice);
+
+  console.log(widthBar1)
+
   const aliensAvatar = [
     {
       id: 1,
@@ -59,19 +67,53 @@ function Game() {
     }
   }
 
+  function hpBar1(){
+    let hp = 0; 
+    for(let i = 0; i < aliens.length; i++){
+      if(aliens[i].nome === player1Choice){
+       hp = aliens[i].hp
+      }         
+      }
+      return hp
+    }
+
+    function hpBar2(){
+      let hp = 0;     
+      for(let i = 0; i < aliens.length; i++){
+        if(aliens[i].nome === player2Choice){
+         hp = aliens[i].hp
+        }         
+        }
+        return hp
+      }
+
+      function attack() {
+
+        setAttack((turn) => {
+          if (turn === player1Choice) {
+            return player2Choice; // Se il turno attuale è player1, passa a player2
+          } else {
+            return player1Choice; // Altrimenti torna a player1
+          }
+        });
+
+      }
+
   return (
     <main>   
       <section className='game'>
         <h2 className='ms-title'>Aliens Fighting Championship</h2>
 
+        <div className='attackTurn'>TURNO ATTACCO: {attackTurn}</div>
+
           <div className='hp1'>
             <div className='namePlayer'>{player1Choice}</div>
-            <div className='bar'></div>
+            <div style={{ width: `${widthBar1}px` }} className='bar'></div>
           </div>
         
           <div className='hp2'>
             <div className='namePlayer'>{player2Choice}</div>
-            <div className='bar'></div>
+            <div style={{ width: `${widthBar2}px` }}  className='bar'></div>
           </div>
       
         <div className='alienFront'>
@@ -89,8 +131,8 @@ function Game() {
         </div>
         <div className='menu'>
           {aliens.map((alieno, index) => 
-            alieno.attacchi.filter((attacco) => alieno.nome === player1Choice).map((attacco) => (      
-                <div className='selectionAtt'>
+            alieno.attacchi.filter((attacco) => alieno.nome === attackTurn).map((attacco) => (      
+                <div onClick={attack} className='attack'>
                   {attacco.nome}
                 </div>
               ))
