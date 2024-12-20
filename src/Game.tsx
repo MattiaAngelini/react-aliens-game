@@ -1,15 +1,12 @@
-import HeroImage from './assets/images/hero.jpg'
 import flareonBack from './assets/images/flareon_back.jpg'
 import flareonFront from './assets/images/flareon_front.jpg'
-
 import glacioraBack from './assets/images/glaciora_back.jpg';
 import glacioraFront from './assets/images/glaciora_front.jpg';
-
 import meteoraxBack from './assets/images/meteorax_back.jpg';
 import meteoraxFront from './assets/images/meteorax_front.jpg';
-
 import voidonBack from './assets/images/voidon_back.jpg';
 import voidonFront from './assets/images/voidon_front.jpg';
+import aliensJson from './assets/aliens.json';
 
 import './assets/styles/Game.scss'
 import { useSelector } from 'react-redux';
@@ -17,6 +14,8 @@ import { useSelector } from 'react-redux';
 function Game() {
   const player1Choice = useSelector((state) => state.players.player1)
   const player2Choice = useSelector((state) => state.players.player2)
+  const aliens = aliensJson;
+  console.log(aliens)
  
   const aliensAvatar = [
     {
@@ -44,8 +43,7 @@ function Game() {
       imgBack: voidonBack
     }
   ];
-  
-  
+
   function renderAlienBack(){
     for(let i = 0; i < aliensAvatar.length; i++){
           if(aliensAvatar[i].name === player1Choice){
@@ -61,31 +59,44 @@ function Game() {
     }
   }
 
-  console.log(renderAlienBack(), renderAlienFront());
-
   return (
     <main>   
-      <section>
+      <section className='game'>
         <h2 className='ms-title'>Aliens Fighting Championship</h2>
 
-        <div className='hero'>
-            <img src={HeroImage} alt="" />
-        </div>
-
+          <div className='hp1'>
+            <div className='namePlayer'>{player1Choice}</div>
+            <div className='bar'></div>
+          </div>
+        
+          <div className='hp2'>
+            <div className='namePlayer'>{player2Choice}</div>
+            <div className='bar'></div>
+          </div>
+      
         <div className='alienFront'>
           <div className='d-flex justify-content-center'>
              <img className='front' src={renderAlienFront()} alt="" />
           </div>
           <div className="base">PLAYER 2: {player2Choice}</div>
         </div>
-              
-
+            
         <div className='alienBack' >
           <div className='d-flex justify-content-center'>
             <img className='back' src={renderAlienBack()} alt="" />
           </div>
           <div className="base">PLAYER 1: {player1Choice} </div>
         </div>
+        <div className='menu'>
+          {aliens.map((alieno, index) => 
+            alieno.attacchi.filter((attacco) => alieno.nome === player1Choice).map((attacco) => (      
+                <div className='selectionAtt'>
+                  {attacco.nome}
+                </div>
+              ))
+          )}
+        </div>
+
       </section>  
     </main>
   )

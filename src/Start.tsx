@@ -29,7 +29,9 @@ function Start() {
 
       <section className="container p-5">
         <h5 className="text-center">SCELTA PERSONAGGI</h5>
+        
         <div className="d-flex justify-content-evenly">
+
           <div className="player1 border">
             <div>PLAYER 1</div>
             <select value={player1Selection} onChange={handleChange1}>

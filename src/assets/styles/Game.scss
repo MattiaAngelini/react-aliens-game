@@ -1,14 +1,11 @@
-section{
+.game{
     height: 100vh;
     position: relative;
+    background-image: url('../images/hero.jpg');
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    grid-template-rows: repeat(6,1fr);
 
-    .hero{
-        height: 100%;         
-            img{
-                height: 100%;
-                width: 100%;              
-            } 
-    }
     .ms-title{
         position: absolute;
         color: white;
@@ -16,34 +13,68 @@ section{
         left: 50%;
         transform: translate(-50%,0);   
     }
-
+    //******** aliens ***********
     .front, .back{
         width: 200px;
-        height: 200px;
+        height: 150px;
         border-radius: 30px; 
     }
-
-    .alienBack{
-        position: absolute;
-        bottom: 15%;
-        left: 15%;
-    }
-
     .alienFront{
-        position: absolute;
-        top: 15%;
-        right: 15%;
+        grid-column: 5;
+        grid-row: 3;
     }
-
+    .alienBack{
+        grid-column: 2;
+        grid-row: 4;
+    }
     .base {
         display: flex;
         justify-content: center;
-        align-items: center;
-        width: 400px;           
-        height: 40px;          
+        align-items: center;         
+        height: 50px;          
         background-color: gray;  
         border-radius: 50%;   
-        font-weight: 800;   
+        font-weight: 800; 
+        width: 60%;
+        margin: auto;  
+      }
+      //******** hp ***********
+      .hp1{
+        grid-column: 2;
+        grid-row: 2;
+        .namePlayer{
+            color: white;
+            font-weight: 600;
+        }
+        .bar{
+            height: 30px;
+            width: 500px; //hp
+            border-radius: 10px;
+            background-color: green;
+        }
+      }
+      .hp2{
+        grid-column: 5;
+        grid-row: 2;
+        .namePlayer{
+            color: white;
+            font-weight: 600;
+        }
+        .bar{
+            height: 30px;
+            width: 500px; //hp
+            border-radius: 10px;
+            background-color: green;
+        }     
       }
 
+      .menu{
+        background-color: white;
+        grid-row: 5/7;
+        grid-column: 1/7;
+        border: 10px solid black;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        grid-template-rows: repeat(2,1fr);
+      }
 }
