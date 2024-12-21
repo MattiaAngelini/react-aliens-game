@@ -54,6 +54,7 @@ function Game() {
           }
     }
   }
+
   function renderAlienFront(){
     for(let i = 0; i < aliensAvatar.length; i++){
           if(aliensAvatar[i].name === player2Choice){
@@ -62,13 +63,13 @@ function Game() {
     }
   }
 
-  function attack(nomeAttacco) {
-    let damage = 0;
+  function attack(nomeAttacco, dannoAttacco) {
+    //damage di default è uguale al danno, del primo attacco scelto di player1.
+    let damage = dannoAttacco
+    
     setSelectedAttack(nomeAttacco);
-
     //controllo se l'attacco selezionato è uguale a uno degli attacchi del json,
     //allora 'damage' diventa pari al danno corrispondente di quell'attacco
-    
     aliens.forEach(alieno => {
       for(let i = 0; i < alieno.attacchi.length; i++){
         if(alieno.attacchi[i].nome === selectedAttack){
@@ -120,8 +121,8 @@ function Game() {
         </div>
         <div className='menu'>
           {aliens.map((alieno, index) => 
-            alieno.attacchi.filter((attacco) => alieno.nome === attackTurn).map((attacco) => (      
-                <div onClick={() => attack(attacco.nome)} className='attack'> 
+            alieno.attacchi.filter(() => alieno.nome === attackTurn).map((attacco) => (      
+                <div key={attacco.id} onClick={() => attack(attacco.nome, attacco.danno)} className='attack'> 
                   {attacco.nome}
                 </div>
               ))
