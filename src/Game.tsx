@@ -10,6 +10,7 @@ import aliensJson from './assets/aliens.json';
 import './assets/styles/Game.scss'
 import { useSelector } from 'react-redux';
 import  { useState } from 'react';
+import { useEffect } from 'react';
 
 function Game() {
   const player1Choice = useSelector((state) => state.players.player1)
@@ -17,6 +18,7 @@ function Game() {
   const aliens = aliensJson;
   const [widthBar1, setWidth1] = useState(500); 
   const [widthBar2, setWidth2] = useState(500); 
+
   const [attackTurn,setAttack] = useState(player1Choice);
   const [selectedAttack, setSelectedAttack] = useState('');
   
@@ -66,7 +68,6 @@ function Game() {
   function attack(nomeAttacco, dannoAttacco) {
     //damage di default è uguale al danno, del primo attacco scelto di player1.
     let damage = dannoAttacco
-    
     setSelectedAttack(nomeAttacco);
     //controllo se l'attacco selezionato è uguale a uno degli attacchi del json,
     //allora 'damage' diventa pari al danno corrispondente di quell'attacco
@@ -77,18 +78,30 @@ function Game() {
         }
       }
     })
-
+    
     // poi, in base al turno attuale, dopo ogni attacco
     // riduco barra hp con il 'damage', che è pari all'attacco selezionato
     if (attackTurn === player1Choice) {
-      setWidth2((prevWidth) => prevWidth - damage); 
-      setAttack(player2Choice); 
-    } else {
-      setWidth1((prevWidth) => prevWidth - damage); 
+      setWidth2((prevWidth) => Math.max(prevWidth - damage, 0) ); 
+      setAttack(player2Choice);  
+    } 
+    else if (attackTurn === player2Choice) {
+      setWidth1((prevWidth) => Math.max(prevWidth - damage, 0) );  
       setAttack(player1Choice); 
-    }
+    } 
+
   }
 
+  useEffect(() => { //VINCITORE
+    if (widthBar1 === 0) {
+      alert('PLAYER 2 HA VINTO');
+      window.history.back();
+    } else if (widthBar2 === 0) {
+      alert('PLAYER 1 HA VINTO');
+      window.history.back();
+    }
+  }, [widthBar1, widthBar2]); 
+  
   return (
     <main>   
       <section className='game'>

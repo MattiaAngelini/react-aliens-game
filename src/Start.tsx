@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 
 function Start() {
   const aliens = aliensJson;
-  
   // Hook per inviare azioni a Redux
   const dispatch = useDispatch(); 
   // Leggi lo stato Redux
@@ -22,6 +21,12 @@ function Start() {
     // Aggiorna Redux con la scelta del player 2
     dispatch(setPlayer2(e.target.value)); 
   };
+
+  function handleChoose(){
+    return player1Selection.length > 0 && 
+    player2Selection.length > 0 && 
+    player1Selection !== player2Selection;
+  }
 
   return (
     <main>
@@ -55,12 +60,15 @@ function Start() {
           </div>
         </div>
 
-        <div className="d-flex justify-content-center">
-          {player1Selection.length > 0 && player2Selection.length > 0 && (
-            <Link to={`/Game`} className="btn btn-primary">
-              START
-            </Link>
-          )}
+        <div className="d-flex justify-content-center p-5">
+          <div>
+            {handleChoose() && (
+              <Link to={`/Game`} className="btn btn-primary">
+                START
+              </Link>
+            )}
+          </div>
+         
         </div>
 
         <div>PLAYER1: {player1Selection}</div>
