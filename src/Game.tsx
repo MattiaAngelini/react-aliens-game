@@ -1,3 +1,4 @@
+import './assets/styles/Game.scss'
 import flareonBack from './assets/images/flareon_back.jpg'
 import flareonFront from './assets/images/flareon_front.jpg'
 import glacioraBack from './assets/images/glaciora_back.jpg';
@@ -7,7 +8,6 @@ import meteoraxFront from './assets/images/meteorax_front.jpg';
 import voidonBack from './assets/images/voidon_back.jpg';
 import voidonFront from './assets/images/voidon_front.jpg';
 import aliensJson from './assets/aliens.json';
-import './assets/styles/Game.scss'
 import { useSelector } from 'react-redux';
 import  { useState } from 'react';
 import { useEffect } from 'react';
@@ -89,7 +89,6 @@ function Game() {
       setWidth1((prevWidth) => Math.max(prevWidth - damage, 0) );  
       setAttack(player1Choice); 
     } 
-
   }
 
   useEffect(() => { //VINCITORE
