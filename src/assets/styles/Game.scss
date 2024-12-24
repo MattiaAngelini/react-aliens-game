@@ -76,13 +76,21 @@
         background-color: white;
         grid-row: 5/7;
         grid-column: 1/7;
-        border: 10px solid black;
+        border: 3px solid black;
         display: grid;
         grid-template-columns: repeat(2,1fr);
         grid-template-rows: repeat(2,1fr);
       }
 
-      .attack:hover{
+      .attackBox{
+        border: 3px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 26px;
+      }
+
+      .attackBox:hover{
         cursor: pointer;
         background-color: lightblue;
       }

@@ -65,29 +65,28 @@ function Game() {
     }
   }
 
-  function attack(nomeAttacco, dannoAttacco) {
-    //damage di default è uguale al danno, del primo attacco scelto di player1.
-    let damage = dannoAttacco
+  function attack(nomeAttacco:string, dannoAttacco:number) {
+    let damageAttack = dannoAttacco
+    let damagePlayer1: number;
+    let damagePlayer2 : number;
     setSelectedAttack(nomeAttacco);
-    //controllo se l'attacco selezionato è uguale a uno degli attacchi del json,
-    //allora 'damage' diventa pari al danno corrispondente di quell'attacco
     aliens.forEach(alieno => {
       for(let i = 0; i < alieno.attacchi.length; i++){
         if(alieno.attacchi[i].nome === selectedAttack){
-          damage = alieno.attacchi[i].danno
+          damageAttack = alieno.attacchi[i].danno
         }
       }
     })
     
-    // poi, in base al turno attuale, dopo ogni attacco
-    // riduco barra hp con il 'damage', che è pari all'attacco selezionato
     if (attackTurn === player1Choice) {
-      setWidth2((prevWidth) => Math.max(prevWidth - damage, 0) ); 
+      damagePlayer1 = dannoAttacco
+      setWidth2((prevWidth) => Math.max(prevWidth - damagePlayer1, 0) ); 
       setAttack(player2Choice);  
     } 
-    else if (attackTurn === player2Choice) {
-      setWidth1((prevWidth) => Math.max(prevWidth - damage, 0) );  
-      setAttack(player1Choice); 
+    else {
+      damagePlayer2 = dannoAttacco
+      setWidth1((prevWidth) => Math.max(prevWidth - damagePlayer2, 0) );  
+      setAttack(player1Choice)
     } 
   }
 
@@ -131,11 +130,12 @@ function Game() {
           </div>
           <div className="base">PLAYER 1: {player1Choice} </div>
         </div>
+
         <div className='menu'>
           {aliens.map((alieno, index) => 
             alieno.attacchi.filter(() => alieno.nome === attackTurn).map((attacco) => (      
-                <div key={attacco.id} onClick={() => attack(attacco.nome, attacco.danno)} className='attack'> 
-                  {attacco.nome}
+                <div key={attacco.id} onClick={() => attack(attacco.nome, attacco.danno)} className='attackBox'> 
+                  {attacco.nome} - Danno: {attacco.danno}
                 </div>
               ))
           )}
