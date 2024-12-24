@@ -13,15 +13,6 @@ import  { useState } from 'react';
 import { useEffect } from 'react';
 
 function Game() {
-  const player1Choice = useSelector((state) => state.players.player1)
-  const player2Choice = useSelector((state) => state.players.player2)
-  const aliens = aliensJson;
-  const [widthBar1, setWidth1] = useState(500); 
-  const [widthBar2, setWidth2] = useState(500); 
-
-  const [attackTurn,setAttack] = useState(player1Choice);
-  const [selectedAttack, setSelectedAttack] = useState('');
-  
   const aliensAvatar = [
     {
       id: 1,
@@ -48,6 +39,16 @@ function Game() {
       imgBack: voidonBack
     }
   ];
+  const aliens = aliensJson;
+  const player1Choice = useSelector((state) => state.players.player1) //condivisi con altri componenti
+  const player2Choice = useSelector((state) => state.players.player2) //condivisi con altri componenti
+  //locale
+  const [widthBar1, setWidth1] = useState(300); 
+  const [widthBar2, setWidth2] = useState(300); 
+  const [attackTurn,setAttack] = useState(player1Choice);
+  const [selectedAttack, setSelectedAttack] = useState('');
+  const [inputAttack1, setInputAttack1] = useState(false); 
+  const [inputAttack2 , setInputAttack2] = useState(false); 
 
   function renderAlienBack(){
     for(let i = 0; i < aliensAvatar.length; i++){
@@ -56,7 +57,6 @@ function Game() {
           }
     }
   }
-
   function renderAlienFront(){
     for(let i = 0; i < aliensAvatar.length; i++){
           if(aliensAvatar[i].name === player2Choice){
@@ -65,10 +65,24 @@ function Game() {
     }
   }
 
+  function borderPlayer1(){
+    if(attackTurn === player1Choice){
+      return "border-player"
+    }
+  }
+  function borderPlayer2(){
+    if(attackTurn === player2Choice){
+      return "border-player"
+    }
+  }
+
+  //Al click di un atttacco
   function attack(nomeAttacco:string, dannoAttacco:number) {
-    let damageAttack = dannoAttacco
+    let damageAttack : number;
     let damagePlayer1: number;
     let damagePlayer2 : number;
+
+    //valore e nome attacco selezionat0
     setSelectedAttack(nomeAttacco);
     aliens.forEach(alieno => {
       for(let i = 0; i < alieno.attacchi.length; i++){
@@ -77,19 +91,31 @@ function Game() {
         }
       }
     })
-    
+    //gestione render animazione attacco,e riduzione barra HP
     if (attackTurn === player1Choice) {
-      damagePlayer1 = dannoAttacco
-      setWidth2((prevWidth) => Math.max(prevWidth - damagePlayer1, 0) ); 
-      setAttack(player2Choice);  
+      damagePlayer1 = dannoAttacco    
+      setInputAttack2(false)
+      setInputAttack1(true)
+     
+      setTimeout(()=>{  
+        setWidth2((prevWidth) => Math.max(prevWidth - damagePlayer1, 0) ); 
+        setAttack(player2Choice); 
+      },1000)
+      
     } 
-    else {
+    
+   if (attackTurn === player2Choice){
       damagePlayer2 = dannoAttacco
-      setWidth1((prevWidth) => Math.max(prevWidth - damagePlayer2, 0) );  
-      setAttack(player1Choice)
+      setInputAttack1(false)
+      setInputAttack2(true)
+      setTimeout(()=>{
+        setWidth1((prevWidth) => Math.max(prevWidth - damagePlayer2, 0) ); 
+        setAttack(player1Choice)      
+      },1000)    
+        
     } 
   }
-
+  //gestione vincitore
   useEffect(() => { //VINCITORE
     if (widthBar1 === 0) {
       alert('PLAYER 2 HA VINTO');
@@ -103,10 +129,7 @@ function Game() {
   return (
     <main>   
       <section className='game'>
-        <h2 className='ms-title'>Aliens Fighting Championship</h2>
-
-        <div className='attackTurn'>TURNO ATTACCO: {attackTurn}</div>
-
+        <h3 className='ms-title'>Aliens Fighting Championship</h3>
           <div className='hp1'>
             <div className='namePlayer'>{player1Choice}</div>
             <div style={{ width: `${widthBar1}px` }} className='bar'></div>
@@ -119,28 +142,33 @@ function Game() {
       
         <div className='alienFront'>
           <div className='d-flex justify-content-center'>
-             <img className='front' src={renderAlienFront()} alt="" />
+          <div className={borderPlayer2()}>
+             <img className='front'  src={renderAlienFront()} alt="" />
           </div>
-          <div className="base">PLAYER 2: {player2Choice}</div>
+             {inputAttack2 && <div className='attackAnimation2'></div>}
+          </div>
+         
         </div>
             
         <div className='alienBack' >
           <div className='d-flex justify-content-center'>
-            <img className='back' src={renderAlienBack()} alt="" />
-          </div>
-          <div className="base">PLAYER 1: {player1Choice} </div>
+            <div className={borderPlayer1()}>
+              <img className='back' src={renderAlienBack()} alt="" />
+            </div>
+            {inputAttack1 && <div className='attackAnimation1'></div>}
+          </div>       
         </div>
-
+      
         <div className='menu'>
           {aliens.map((alieno, index) => 
             alieno.attacchi.filter(() => alieno.nome === attackTurn).map((attacco) => (      
                 <div key={attacco.id} onClick={() => attack(attacco.nome, attacco.danno)} className='attackBox'> 
-                  {attacco.nome} - Danno: {attacco.danno}
+                  <span>{attacco.nome} - Danno: {attacco.danno}</span>
                 </div>
               ))
           )}
         </div>
-
+        
       </section>  
     </main>
   )

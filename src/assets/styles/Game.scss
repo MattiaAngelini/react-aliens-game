@@ -1,10 +1,15 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .game{
     height: 100vh;
     position: relative;
     background-image: url('../images/hero.jpg');
     display: grid;
     grid-template-columns: repeat(6,1fr);
-    grid-template-rows: repeat(6,1fr);
+    grid-template-rows: repeat(12,1fr);
 
     .ms-title{
         position: absolute;
@@ -14,35 +19,22 @@
         transform: translate(-50%,0);   
     }
 
-    .attackTurn {
-        color: white;
-        font-weight: 700;
-    }
     //******** aliens ***********
     .front, .back{
         width: 200px;
         height: 150px;
-        border-radius: 30px; 
+        border-radius: 20px;
+        margin: 10px;
     }
     .alienFront{
         grid-column: 5;
-        grid-row: 3;
+        grid-row: 4;
     }
     .alienBack{
         grid-column: 2;
-        grid-row: 4;
+        grid-row: 7;
     }
-    .base {
-        display: flex;
-        justify-content: center;
-        align-items: center;         
-        height: 50px;          
-        background-color: gray;  
-        border-radius: 50%;   
-        font-weight: 800; 
-        width: 60%;
-        margin: auto;  
-      }
+
       //******** hp ***********
       .hp1{
         grid-column: 2;
@@ -52,9 +44,9 @@
             font-weight: 600;
         }
         .bar{
-            height: 30px;
+            height: 20px;
             width: 500px; //hp
-            border-radius: 10px;
+            border-radius: 4px;
             background-color: green;
         }
       }
@@ -67,15 +59,15 @@
         }
 
         .bar{
-            height: 30px;
-            border-radius: 10px;
+            height: 20px;
+            border-radius: 4px;
             background-color: green;      
         }           
       }
       .menu{
         background-color: white;
-        grid-row: 5/7;
-        grid-column: 1/7;
+        grid-row: 9/12;
+        grid-column: 2/6;
         border: 3px solid black;
         display: grid;
         grid-template-columns: repeat(2,1fr);
@@ -88,10 +80,104 @@
         justify-content: center;
         align-items: center;
         font-size: 26px;
+        
+          span{
+            animation: box 0.3s linear 1; 
+          }
       }
 
       .attackBox:hover{
         cursor: pointer;
         background-color: lightblue;
       }
+
+      @keyframes box {
+        0% {
+          opacity: 0;
+          transform: translateX(-30%);
+        }
+        100% {
+         opacity: 1;
+         transform: translateX(0);
+        }
+      }
+
+      // animazioni attacchi sferrati
+      .attackAnimation1{
+        background-color: rgb(49, 13, 48);
+        position: absolute;
+        border-radius: 100%;
+        height: 30px;
+        width: 30px;
+        animation: move1 0.4s linear 1; 
+        background-color: rgb(52, 50, 53);
+        box-shadow: 0 0 40px 40px rgba(0, 0, 0, 0.9); 
+        opacity: 0;
+      
+      }
+      .attackAnimation2 {       
+        position: absolute;
+        border-radius: 100%;
+        background-color: rgb(52, 50, 53);
+        box-shadow: 0 0 40px 40px rgba(0, 0, 0, 0.9); 
+        height: 30px;
+        width: 30px;
+        animation: move2 0.4s linear 1;    
+        opacity: 0;   
+      }
+
+      @keyframes move1 {
+        0% {
+          top: 55%;
+          left:20%;
+          opacity: 1;
+        }
+        100% {
+          top: 30%;
+          left: 70%;
+          opacity: 1;
+        }
+      }
+
+      @keyframes move2 {
+        0% {
+          top: 30%;
+          left:70%;
+          opacity: 1;
+        }
+        100% {
+          top: 55%;
+          left: 20%;
+          opacity: 1;
+        }
+      }
+      // border player attack
+      .border-player{
+        animation: alarmEffect 0.8s linear infinite; 
+        border-radius: 10px;
+      }
+
+      @keyframes alarmEffect {
+        0% {
+          background-color: rgb(44, 181, 44);
+        }
+        100% {
+         
+        }
+      }
+
+      // vibrazione al danno subito
+      .vibration{
+        animation: vibration 0.3s linear infinite; 
+      }
+
+      @keyframes vibration {
+        0% {
+          scale: (1.1);
+        }
+        100% {
+         
+        }
+      }
+
 }
