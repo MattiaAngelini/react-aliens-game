@@ -4,6 +4,7 @@ import { setPlayer1, setPlayer2 } from './redux/slices/playersSlice.js'; // Impo
 import aliensJson from './assets/aliens.json';
 import { Link } from 'react-router-dom';
 import  { useState } from 'react';
+import { useEffect } from 'react';
 //img
 import flareonFront from './assets/images/flareon_front.jpg'
 import glacioraFront from './assets/images/glaciora_front.jpg';
@@ -36,7 +37,7 @@ function Start() {
            player1Selection !== player2Selection;
   }
   //render immagini in base a scelta utente
-  function renderImageChoosen(){
+  useEffect(() => {
     if(player1Selection === 'Flareon'){
       setSelectedAlienImage1(flareonFront)
     } else if(player1Selection === 'Glaciora'){
@@ -55,19 +56,20 @@ function Start() {
     }else if(player2Selection === 'Voidon'){
       setSelectedAlienImage2(voidonFront)
     }
-  }
+  }, [player1Selection, player2Selection]); // Dipendenze
   
   return (
     <main className='startMenu'>
-      <section className="container p-5">
+      <section className="container">
         <h1 className="text-center">Aliens Fighting Championship</h1>
         <h3 className="text-center p-1">SELECT ALIEN</h3>    
-        <div className="d-flex justify-content-evenly p-5">
+        <div className="d-lg-flex d-block justify-content-evenly gap-5">
           
-          <div className="player1">
+          <div className="player1 mt-4">
             <div>PLAYER 1</div>
-            <select value={player1Selection} onClick={renderImageChoosen} onChange={handleChange1}>
+            <select value={player1Selection} onChange={handleChange1}>
             <option value="" selected>Seleziona un Alieno</option>
+              {/* OPTIONS PLAYER1*/}
               {aliens.map((alien, index) => (
                 <option key={index} value={alien.nome}>
                   {alien.nome}
@@ -80,10 +82,11 @@ function Start() {
           </div>
           </div>
 
-          <div className="player2">
+          <div className="player2 mt-4">
             <div>PLAYER 2</div>
-            <select value={player2Selection} onClick={renderImageChoosen} onChange={handleChange2}>
+            <select value={player2Selection} onChange={handleChange2}>
             <option value="" selected>Seleziona un Alieno</option>
+              {/* OPTIONS PLAYER2*/}
               {aliens.map((alien, index) => (
                 <option key={index} value={alien.nome}>
                   {alien.nome}

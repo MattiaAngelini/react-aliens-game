@@ -1,183 +1,168 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-.game{
-    height: 100vh;
-    position: relative;
-    background-image: url('../images/hero.jpg');
-    display: grid;
-    grid-template-columns: repeat(6,1fr);
-    grid-template-rows: repeat(12,1fr);
 
-    .ms-title{
-        position: absolute;
+.picGame {
+  height: 100vh;
+  background-image: url('../images/hero.jpg');
+  background-size: cover;
+  position: relative;
+
+  .ms-title {
+    color: white;
+  }
+
+
+  //******** hp ***********
+  
+  .borderHp{
+    width: 305px;
+    border-radius: 4px;
+    border: 3px solid black;
+    margin: 4px auto 4px auto;
+
+    .hp1 , .hp2 {
+      .namePlayer {
         color: white;
-        top: 10px;
-        left: 50%;
-        transform: translate(-50%,0);   
+        font-weight: 400;
+      }
+      .energy {
+        height: 100%;
+        background-color: green;
+      }
     }
+  }
 
-    //******** aliens ***********
-    .front, .back{
-        width: 200px;
-        height: 150px;
-        border-radius: 20px;
-        margin: 10px;
+  //******** aliens ***********
+  .front,
+  .back {
+    border-radius: 20px;
+  }
+  .alienFront {
+    position: absolute;
+    right: 10%;
+    top: 20%;
+  }
+  .alienBack {
+    position: absolute;
+    left: 10%;
+    bottom: 25%;
+  }
+
+  .menu {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+    background-color: rgb(0, 0, 0);
+    padding: 10px;
+  }
+
+  .attackBox {
+    height: 70px;
+    color: white;
+    background-color: rgb(122, 111, 149);
+    border-radius: 10px;
+    border: 2px solid purple;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+
+    span {
+      animation: box 0.3s linear 1;
+      padding: 4px;
     }
-    .alienFront{
-        grid-column: 5;
-        grid-row: 4;
+  }
+
+  .attackBox:hover {
+    cursor: pointer;
+    background-color: rgb(173, 52, 52);
+  }
+
+  @keyframes box {
+    0% {
+      opacity: 0;
+      transform: translateX(-6%);
     }
-    .alienBack{
-        grid-column: 2;
-        grid-row: 7;
+    100% {
+      opacity: 1;
+      transform: translateX(0);
     }
+  }
 
-      //******** hp ***********
-      .hp1{
-        grid-column: 2;
-        grid-row: 2;
-        .namePlayer{
-            color: white;
-            font-weight: 600;
-        }
-        .bar{
-            height: 20px;
-            width: 500px; //hp
-            border-radius: 4px;
-            background-color: green;
-        }
-      }
-      .hp2{
-        grid-column: 5;
-        grid-row: 2;
-        .namePlayer{
-            color: white;
-            font-weight: 600;
-        }
+  // animazioni attacchi sferrati
+  .attackAnimation1 {
+    background-color: rgb(49, 13, 48);
+    position: absolute;
+    border-radius: 100%;
+    height: 30px;
+    width: 30px;
+    animation: move1 0.4s linear 1;
+    background-color:  rgb(137, 13, 13);
+    box-shadow: 0 0 40px 40px rgba(0, 0, 0, 0.9);
+    opacity: 0;
+  }
 
-        .bar{
-            height: 20px;
-            border-radius: 4px;
-            background-color: green;      
-        }           
-      }
-      .menu{
-        background-color: white;
-        grid-row: 9/12;
-        grid-column: 2/6;
-        border: 3px solid black;
-        display: grid;
-        grid-template-columns: repeat(2,1fr);
-        grid-template-rows: repeat(2,1fr);
-      }
+  .attackAnimation2 {
+    position: absolute;
+    border-radius: 100%;
+    background-color: rgb(8, 130, 43);
+    box-shadow: 0 0 40px 40px rgba(0, 0, 0, 0.9);
+    height: 30px;
+    width: 30px;
+    animation: move2 0.4s linear 1;
+    opacity: 0;
+  }
 
-      .attackBox{
-        border: 3px solid black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 26px;
-        
-          span{
-            animation: box 0.3s linear 1; 
-          }
-      }
-
-      .attackBox:hover{
-        cursor: pointer;
-        background-color: lightblue;
-      }
-
-      @keyframes box {
-        0% {
-          opacity: 0;
-          transform: translateX(-30%);
-        }
-        100% {
-         opacity: 1;
-         transform: translateX(0);
-        }
-      }
-
-      // animazioni attacchi sferrati
-      .attackAnimation1{
-        background-color: rgb(49, 13, 48);
-        position: absolute;
-        border-radius: 100%;
-        height: 30px;
-        width: 30px;
-        animation: move1 0.4s linear 1; 
-        background-color: rgb(52, 50, 53);
-        box-shadow: 0 0 40px 40px rgba(0, 0, 0, 0.9); 
-        opacity: 0;
+  @keyframes move1 {
+    0% {
+      left: 20%; 
+      bottom: 20%;
+      opacity: 1;
+    
+    }
+    100% {
+      left: 80%; 
+      bottom: 70%;
+      opacity: 1;
       
-      }
-      .attackAnimation2 {       
-        position: absolute;
-        border-radius: 100%;
-        background-color: rgb(52, 50, 53);
-        box-shadow: 0 0 40px 40px rgba(0, 0, 0, 0.9); 
-        height: 30px;
-        width: 30px;
-        animation: move2 0.4s linear 1;    
-        opacity: 0;   
-      }
+    }
+  }
+  
+  @keyframes move2 {
+    0% {
+      left: 80%; 
+      bottom: 70%;
+      opacity: 1;
+    
+    }
+    100% {
+      left: 20%;
+      bottom: 30%;
+      opacity: 1;
+      
+    }
+  }
+  
+  // border player attack
+  .round-player {
+    animation: alarmEffect 0.7s linear infinite;
+    border-radius: 10px;
+  }
 
-      @keyframes move1 {
-        0% {
-          top: 55%;
-          left:20%;
-          opacity: 1;
-        }
-        100% {
-          top: 30%;
-          left: 70%;
-          opacity: 1;
-        }
-      }
-
-      @keyframes move2 {
-        0% {
-          top: 30%;
-          left:70%;
-          opacity: 1;
-        }
-        100% {
-          top: 55%;
-          left: 20%;
-          opacity: 1;
-        }
-      }
-      // border player attack
-      .border-player{
-        animation: alarmEffect 0.8s linear infinite; 
-        border-radius: 10px;
-      }
-
-      @keyframes alarmEffect {
-        0% {
-          background-color: rgb(44, 181, 44);
-        }
-        100% {
-         
-        }
-      }
-
-      // vibrazione al danno subito
-      .vibration{
-        animation: vibration 0.3s linear infinite; 
-      }
-
-      @keyframes vibration {
-        0% {
-          scale: (1.1);
-        }
-        100% {
-         
-        }
-      }
-
+  @keyframes alarmEffect {
+    0% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1.0);
+    }
+  }
 }
