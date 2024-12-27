@@ -99,14 +99,13 @@
 
   // animazioni attacchi sferrati
   .attackAnimation1 {
-    background-color: rgb(49, 13, 48);
     position: absolute;
     border-radius: 100%;
     height: 30px;
     width: 30px;
-    animation: move1 0.4s linear 1;
+    animation: move1 0.3s linear 1;
     background-color:  rgb(137, 13, 13);
-    box-shadow: 0 0 40px 40px rgba(0, 0, 0, 0.9);
+    box-shadow: 0 0 20px 20px rgba(0, 0, 0, 0.9);
     opacity: 0;
   }
 
@@ -114,24 +113,28 @@
     position: absolute;
     border-radius: 100%;
     background-color: rgb(8, 130, 43);
-    box-shadow: 0 0 40px 40px rgba(0, 0, 0, 0.9);
+    box-shadow: 0 0 20px 20px rgba(0, 0, 0, 0.9);
     height: 30px;
     width: 30px;
-    animation: move2 0.4s linear 1;
+    animation: move2 0.3s linear 1;
     opacity: 0;
   }
 
   @keyframes move1 {
     0% {
       left: 20%; 
-      bottom: 20%;
+      bottom: 30%;
       opacity: 1;
+      transform: scale(0.3);
+      background-color: yellow;
     
     }
     100% {
       left: 80%; 
       bottom: 70%;
       opacity: 1;
+      transform: scale(2.0);
+      background-color: red;
       
     }
   }
@@ -141,12 +144,16 @@
       left: 80%; 
       bottom: 70%;
       opacity: 1;
+      transform: scale(0.3);
+      background-color: yellow;
     
     }
     100% {
-      left: 20%;
+      left: 10%;
       bottom: 30%;
       opacity: 1;
+      transform: scale(2.0);
+      background-color: red;
       
     }
   }

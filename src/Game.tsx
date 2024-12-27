@@ -52,8 +52,9 @@ function Game() {
   const [inputAttack1, setInputAttack1] = useState(false);
   const [inputAttack2, setInputAttack2] = useState(false);
   const [sizeWindow, setSizeWindow] = useState(currentWindow(window.innerWidth));
-
   const [responsiveImage, setResponsiveImage] = useState(120);
+  
+
 
 
   function viewPortSize() {
@@ -107,25 +108,25 @@ function Game() {
       }
     });
     // gestione render animazione attacco, e riduzione barra HP
+    
     if (attackTurn === player1Choice) {
-      damagePlayer1 = dannoAttacco;
+      setAttack(player2Choice)
       setInputAttack2(false);
       setInputAttack1(true);
-
       setTimeout(() => {
         setWidth2((prevWidth) => Math.max(prevWidth - damagePlayer1, 0));
-        setAttack(player2Choice);
-      }, 1000);
+        damagePlayer1 = dannoAttacco;
+      }, 400);
     }
 
     if (attackTurn === player2Choice) {
-      damagePlayer2 = dannoAttacco;
+      setAttack(player1Choice);
       setInputAttack1(false);
       setInputAttack2(true);
       setTimeout(() => {
         setWidth1((prevWidth) => Math.max(prevWidth - damagePlayer2, 0));
-        setAttack(player1Choice);
-      }, 1000);
+        damagePlayer2 = dannoAttacco;
+      }, 400);
     }
   }
 
@@ -141,14 +142,17 @@ function Game() {
 
   // gestione vincitore
   useEffect(() => {
-    if (widthBar1 === 0) {
+    if (widthBar1 <= 0) {
+      
       alert('PLAYER 2 HA VINTO');
       window.history.back();
-    } else if (widthBar2 === 0) {
+    } else if (widthBar2 <=  0) {
       alert('PLAYER 1 HA VINTO');
       window.history.back();
     }
-  }, [widthBar1, widthBar2]);
+  }, [widthBar1]);
+
+
 
   return (
     <main>
@@ -207,7 +211,8 @@ function Game() {
             alieno.attacchi
               .filter(() => alieno.nome === attackTurn)
               .map((attacco) => (
-                <div
+                <button 
+                  
                   key={attacco.id}
                   onClick={() => attack(attacco.nome, attacco.danno)}
                   className="attackBox"
@@ -215,7 +220,8 @@ function Game() {
                   <span>
                     {attacco.nome} - Danno: {attacco.danno}
                   </span>
-                </div>
+
+                </button>
               ))
           )}
         </div>
