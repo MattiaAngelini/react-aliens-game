@@ -14,7 +14,6 @@
     color: white;
   }
 
-
   //******** hp ***********
   
   .borderHp{
@@ -33,6 +32,13 @@
         background-color: green;
       }
     }
+  }
+
+  //******** timer ***********
+  .timer{
+    display: flex;
+    align-items: center;
+    color: red;
   }
 
   //******** aliens ***********

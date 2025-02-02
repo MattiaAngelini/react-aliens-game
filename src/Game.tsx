@@ -53,10 +53,8 @@ function Game() {
   const [inputAttack2, setInputAttack2] = useState(false);
   const [sizeWindow, setSizeWindow] = useState(currentWindow(window.innerWidth));
   const [responsiveImage, setResponsiveImage] = useState(120);
+  const [timerTurn, setTimerTurn] = useState(1);
   
-
-
-
   function viewPortSize() {
     window.addEventListener('resize', () => {
       setSizeWindow(currentWindow(window.innerWidth)) 
@@ -79,7 +77,7 @@ function Game() {
       }
     }
   }
-
+  
   function roundPlayer1() {
     if (attackTurn === player1Choice) {
       return "round-player";
@@ -143,7 +141,6 @@ function Game() {
   // gestione vincitore
   useEffect(() => {
     if (widthBar1 <= 0) {
-      
       alert('PLAYER 2 HA VINTO');
       window.history.back();
     } else if (widthBar2 <=  0) {
@@ -153,6 +150,21 @@ function Game() {
   }, [widthBar1]);
 
 
+  // gestione turni con timer 30 secondi
+  useEffect(()=>{
+      setTimeout(() => {
+        setTimerTurn(timerTurn + 1)
+        if(timerTurn === 30 && attackTurn === player1Choice){
+        setAttack(player2Choice)
+        setTimerTurn(0)
+          }
+          else if(timerTurn === 30 && attackTurn === player2Choice){
+            setAttack(player1Choice)
+            setTimerTurn(1)
+          }
+      },1000)
+  
+  }, [timerTurn])
 
   return (
     <main>
@@ -167,8 +179,11 @@ function Game() {
               </div>
             </div>
           </div>
-         
 
+        <div className='timer'>
+          <span>{timerTurn}</span>
+        </div>
+          
           <div className='borderHp'>
             <div className="hp2">  
               <div style={{ width: `${widthBar2}px` }} className="energy">
