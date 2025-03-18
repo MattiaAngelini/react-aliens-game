@@ -116,6 +116,7 @@ function Game() {
         damagePlayer1 = dannoAttacco;
       }, 400);
     }
+    
 
     if (attackTurn === player2Choice) {
       setAttack(player1Choice);
@@ -170,6 +171,9 @@ function Game() {
     <main>
       <section className="picGame">
         <h3 className="ms-title text-center p-2">Aliens Fighting Championship</h3>
+        <div className='timer'>
+          <span>{timerTurn}</span>
+        </div>
         <div className="d-lg-flex justify-content-evenly">
           
           <div className="borderHp">
@@ -180,10 +184,6 @@ function Game() {
             </div>
           </div>
 
-        <div className='timer'>
-          <span>{timerTurn}</span>
-        </div>
-          
           <div className='borderHp'>
             <div className="hp2">  
               <div style={{ width: `${widthBar2}px` }} className="energy">
@@ -193,7 +193,7 @@ function Game() {
           </div>
         
         </div>
-
+      
         <div className="alienFront">
           <div className="d-flex justify-content-center">
             <div className={roundPlayer2()}>
