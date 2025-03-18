@@ -1,6 +1,5 @@
-# React + TypeScript + Vite
+# Aliens Fighting Championship (React + TypeScript + Vite)
 
-Aliens Fighting Championship
 Aliens Fighting Championship è un gioco di combattimento a turni ispirato ai classici giochi di battaglia come Pokémon. I giocatori possono scegliere tra diversi alieni, ognuno con attacchi unici, e sfidarsi in una battaglia epica per decretare il vincitore.
 
 Funzionalità
